@@ -47,7 +47,7 @@ else
                         echo "Input must be an integer"
                 else
                         git add "${file[index]}"
-                        echo -e "File ${PURPLE}${file[j]}${NC} has been added.\n"
+                        echo -e "File ${PURPLE}${file[$index]}${NC} has been added.\n"
                         deleteElement "$index"
                         if [[ ${#file[@]} -eq 0 ]]
                         then
