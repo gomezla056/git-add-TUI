@@ -1,5 +1,9 @@
 #!/bin/bash
 
+RED="\033[0;31m"
+PURPLE="\033[0;35m"
+CYAN="\033[0;36m"
+NC="\033[0m"
 file=()
 
 getUnstagedFiles () {
@@ -14,7 +18,7 @@ printUnstagedFiles () {
         echo "Modified files: "
         for j in "${!file[@]}"
         do
-                echo -e "\033[0;36m[$j]\033[0m \033[0;31m${file[j]}\033[0m"
+                echo -e "${CYAN}[$j]${NC} ${RED}${file[j]}${NC}"
         done
 }
 
@@ -34,7 +38,7 @@ else
         read index
         while [[ $index != "Q" && $index != "q" ]]
         do
-                if [[ $index -ge ${#file[@]} || $index > 0 ]]
+                if [[ $index -ge ${#file[@]} || $index < 0 ]]
                 then
                         maxLength="$((${#file[@]} - 1))"
                         echo "Input must be an integer between 0 and $maxLength"
@@ -43,7 +47,7 @@ else
                         echo "Input must be an integer"
                 else
                         git add "${file[index]}"
-                        echo -e "File \033[0;31m${file[j]}\033[0m has been added.\n"
+                        echo -e "File ${PURPLE}${file[j]}${NC} has been added.\n"
                         deleteElement "$index"
                         if [[ ${#file[@]} -eq 0 ]]
                         then
