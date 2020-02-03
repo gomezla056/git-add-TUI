@@ -9,7 +9,7 @@ file=()
 getUnstagedFiles () {
         local lineNumber=$(git status | grep -n "Changes not staged" | cut -d ":" -f1)
         if [[ $lineNumber ]]
-        then
+        then    
                 file=($(git status | tail +$lineNumber | grep "modified: " $file | cut -d " " -f4))
         fi
 }
@@ -17,7 +17,7 @@ getUnstagedFiles () {
 printUnstagedFiles () {
         echo "Modified files: "
         for j in "${!file[@]}"
-        do
+        do      
                 echo -e "${CYAN}[$j]${NC} ${RED}${file[j]}${NC}"
         done
 }
@@ -47,7 +47,7 @@ else
                         echo "Input must be an integer"
                 else
                         git add "${file[index]}"
-                        echo -e "File ${PURPLE}${file[$index]}${NC} has been added.\n"
+                        echo -e "File ${PURPLE}${file[index]}${NC} has been added.\n"
                         deleteElement "$index"
                         if [[ ${#file[@]} -eq 0 ]]
                         then
